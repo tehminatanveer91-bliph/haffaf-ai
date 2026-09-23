@@ -930,8 +930,4 @@ export default function HaffafAI(){
 
     </div>
   );
-}
-
-Bas is file ka existing code select-all karke ye poora code paste kar do. "DOMPurify" ka import ismein nahi hai. Baaki tumhara "/api/chat", chat history, dark/light mode, regenerate, copy, rename/delete aur mobile sidebar wala system same hai. ❤️🔥
-
-Aur "package.json" se DOMPurify abhi delete mat karna, jaise tumne kaha tha.
+          }
