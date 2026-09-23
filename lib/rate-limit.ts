@@ -1,9 +1,12 @@
-const requests = new Map<string, { count: number; resetAt: number }>();
+const requests = new Map<
+  string,
+  { count: number; resetAt: number }
+>();
 
 export function checkRateLimit(
   key: string,
-  limit = Number(process.env.RATE_LIMIT_PER_MINUTE || 20)
-) {
+  limit = 20
+): { allowed: boolean; remaining: number } {
   const now = Date.now();
   const existing = requests.get(key);
 
@@ -13,13 +16,23 @@ export function checkRateLimit(
       resetAt: now + 60_000,
     });
 
-    return true;
+    return {
+      allowed: true,
+      remaining: Math.max(0, limit - 1),
+    };
   }
 
   if (existing.count >= limit) {
-    return false;
+    return {
+      allowed: false,
+      remaining: 0,
+    };
   }
 
   existing.count += 1;
-  return true;
-    }
+
+  return {
+    allowed: true,
+    remaining: Math.max(0, limit - existing.count),
+  };
+}
