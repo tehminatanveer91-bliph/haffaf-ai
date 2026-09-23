@@ -1,5 +1,5 @@
 import {NextRequest,NextResponse} from 'next/server';
-import { checkRateLimit } from "../../../lib/rate-limit";
+import { checkRateLimit } from "@/lib/rate-limit";
 export const runtime='nodejs';
 type Msg={role:'user'|'assistant'|'system';content:string};
 export async function POST(req:NextRequest){
